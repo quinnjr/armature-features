@@ -25,7 +25,12 @@ rand = "0.10"
 regex = "1"
 
 # LaunchDarkly integration (optional)
-launchdarkly-server-sdk = { version = "3.1", optional = true }
+# 3.x defaults add `event-compression`; 2.6 used rustls with native roots,
+# aws-lc-rs for secure-mode hashing, and uncompressed events. Keep that stack.
+launchdarkly-server-sdk = { version = "3.1", optional = true, default-features = false, features = [
+    "hyper-rustls-native-roots",
+    "crypto-aws-lc-rs",
+] }
 
 [features]
 default = []
