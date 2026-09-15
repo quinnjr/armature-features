@@ -9,13 +9,12 @@ Earlier changes are recorded in the workspace [`CHANGELOG.md`](../CHANGELOG.md).
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-09-15
+
 ### Changed
 
+- **Breaking:** requires `armature-core` 0.10 (was `0.9`); its types appear in this crate's API, so the requirement change is breaking here and the minor moves. Part of the `armature-core` 0.10 release train.
 - The `launchdarkly` feature uses `launchdarkly-server-sdk` 3.1 (was 2.6), which needs Rust 1.93 or later. Default features are off, so the TLS stack stays what 2.6 used: rustls with native roots, and aws-lc-rs for crypto. Event compression stays off. The adapter's API is unchanged.
-
-### Fixed
-
-- The per-thread regex cache is bounded. Patterns can arrive from a remote flag service, and the cache was never evicted, so cost grew with distinct patterns times threads.
 
 ## [0.3.0] - 2026-08-05
 
