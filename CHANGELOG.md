@@ -9,6 +9,16 @@ Earlier changes are recorded in the workspace [`CHANGELOG.md`](../CHANGELOG.md).
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-10-17
+
+### Security
+
+- LaunchDarkly adapter: every evaluation attribute is now marked **private** (redacted from analytics events) unless allowlisted via `LaunchDarklyProvider::with_public_attributes`. Contexts with no `user_id` are sent as `anonymous` contexts keyed by a SHA-256 digest of `session_id` (or a fresh random key), instead of every anonymous user sharing the key `"anonymous"`; `session_id` itself is never sent.
+
+### Changed
+
+- **Breaking:** `launchdarkly::to_ld_context` takes a second `&HashSet<String>` argument (the public-attribute allowlist). Migration: pass `&HashSet::new()` for all-private, or use `LaunchDarklyProvider::evaluate`.
+
 ## [0.4.0] - 2026-09-15
 
 ### Changed
